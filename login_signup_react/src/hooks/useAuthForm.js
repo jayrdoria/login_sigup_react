@@ -30,7 +30,7 @@ function useAuthForm() {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post('http://localhost/backend/api/login.php', {
+                const response = await axios.post('./backend/api/login.php', {
                     email: email,
                     password: password
                 });
@@ -66,7 +66,7 @@ function useAuthForm() {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post('http://localhost/backend/api/signup.php', {
+                const response = await axios.post('./backend/api/signup.php', {
                     email: email,
                     password: password,
                     confirmPassword: confirmPassword
