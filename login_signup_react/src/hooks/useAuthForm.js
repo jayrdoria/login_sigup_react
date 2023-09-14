@@ -34,10 +34,14 @@ function useAuthForm() {
                     email: email,
                     password: password
                 });
-            
-                // Handle response, you might want to do something with the response, 
-                // like setting user data or redirecting.
+
+                // Handle response
                 console.log(response.data.message);
+                
+                // Reset inputs after successful login
+                if(response.data.message === "Login successful.") { 
+                    resetInputs();
+                }
 
             } catch (error) {
                 console.error("Error during login:", error);
@@ -67,10 +71,14 @@ function useAuthForm() {
                     password: password,
                     confirmPassword: confirmPassword
                 });
-                
-                // Handle response, you might want to do something with the response, 
-                // like showing a success message or redirecting.
+
+                // Handle response
                 console.log(response.data.message);
+                
+                // Reset inputs after successful signup
+                if(response.data.message === "User registered successfully.") { 
+                    resetInputs();
+                }
 
             } catch (error) {
                 console.error("Error during sign up:", error);
