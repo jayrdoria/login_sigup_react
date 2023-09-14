@@ -1,5 +1,6 @@
 {
   "name": "login_signup_react",
+  "homepage": "/Calendar",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
