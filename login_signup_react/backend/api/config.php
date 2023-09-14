@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $host = 'localhost'; // or the IP address of your MySQL server
-$db   = 'user_auth';
-$user = 'root';
-$pass = '';
+$db   = 'user';
+$user = 'handler';
+$pass = '@7[)n95-KQp[]nz0';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
