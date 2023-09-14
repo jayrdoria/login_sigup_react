@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit; // just exit if it's a preflight request
 }
 
-$host = 'localhost'; // or the IP address of your MySQL server
+$host = 'https://lagueslo.com'; // or the IP address of your MySQL server
 $db   = 'user';
 $user = 'handler';
 $pass = '@7[)n95-KQp[]nz0';
