@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 function useAuthForm() {
     const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ function useAuthForm() {
         return regex.test(email);
     };
 
-    const handleLoginClick = () => {
+    const handleLoginClick = async () => {
         let newErrors = {};
 
         if (!validateEmail(email)) {
@@ -28,13 +29,25 @@ function useAuthForm() {
         }
 
         if (Object.keys(newErrors).length === 0) {
-            console.log("Login button clicked");
+            try {
+                const response = await axios.post('http://localhost/backend/api/login.php', {
+                    email: email,
+                    password: password
+                });
+            
+                // Handle response, you might want to do something with the response, 
+                // like setting user data or redirecting.
+                console.log(response.data.message);
+
+            } catch (error) {
+                console.error("Error during login:", error);
+            }
         } else {
             setErrors(newErrors);
         }
     };
 
-    const handleSignUpClick = () => {
+    const handleSignUpClick = async () => {
         let newErrors = {};
 
         if (!validateEmail(email)) {
@@ -48,7 +61,20 @@ function useAuthForm() {
         }
 
         if (Object.keys(newErrors).length === 0) {
-            console.log("Sign Up button clicked");
+            try {
+                const response = await axios.post('http://localhost/backend/api/signup.php', {
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword
+                });
+                
+                // Handle response, you might want to do something with the response, 
+                // like showing a success message or redirecting.
+                console.log(response.data.message);
+
+            } catch (error) {
+                console.error("Error during sign up:", error);
+            }
         } else {
             setErrors(newErrors);
         }
