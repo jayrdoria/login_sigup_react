@@ -14,16 +14,21 @@ $data = json_decode(file_get_contents("php://input"));
 if(isset($data->email) && isset($data->password)){
     $email = $data->email;
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
 
-    if($user && password_verify($data->password, $user['password'])){
-        echo json_encode(["message" => "Login successful."]);
-    } else {
-        echo json_encode(["message" => "Invalid credentials."]);
+        if($user && password_verify($data->password, $user['password'])){
+            echo json_encode(["message" => "Login successful."]);
+        } else {
+            echo json_encode(["message" => "Invalid credentials."]);
+        }
+    } catch(PDOException $e) {
+        echo json_encode(["message" => $e->getMessage()]);
     }
 } else {
     echo json_encode(["message" => "Invalid input."]);
 }
+
 ?>
