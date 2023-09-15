@@ -1,17 +1,16 @@
 <?php
 
 header("Access-Control-Allow-Origin: https://lagueslo.com");
-
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit; // just exit if it's a preflight request
 }
 
-$host = '194.233.82.236'; // or the IP address of your MySQL server
-$db   = 'user';
-$user = 'handler';
-$pass = '@7[)n95-KQp[]nz0';
+$host = 'localhost'; // or the IP address of your MySQL server
+$db   = 'admin_crud';
+$user = 'admin_crud';
+$pass = 'kTHqd21moT';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

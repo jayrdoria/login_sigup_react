@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../css/AuthForm.css';
 import useAuthForm from '../hooks/useAuthForm';
 
 function AuthForm() {
+    const checkBoxRef = useRef(null);
+    const navigateToLogin = () => {
+    if (checkBoxRef.current) {
+        checkBoxRef.current.checked = false;
+    }
+};
     const { 
         handleLoginClick, 
         handleSignUpClick, 
@@ -16,11 +22,12 @@ function AuthForm() {
         setErrors, // Make sure to destructure setErrors
         clearErrors,
         resetInputs
-    } = useAuthForm();
+    } = useAuthForm(navigateToLogin);
 
     return (
         <div className="container">
             <input 
+                ref={checkBoxRef}
                 type="checkbox" 
                 id="check" 
                 onChange={() => {

@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-function useAuthForm() {
+function useAuthForm(navigateToLogin) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
+
+    let navigate = useNavigate();
 
     const resetInputs = () => {
         setEmail("");
@@ -30,7 +34,7 @@ function useAuthForm() {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post('./backend/api/login.php', {
+                const response = await axios.post('http://localhost/backend/api/login.php', {
                     email: email,
                     password: password
                 });
@@ -40,14 +44,18 @@ function useAuthForm() {
                 
                 // Reset inputs after successful login
                 if(response.data.message === "Login successful.") { 
+                    toast.success("Logged in successfully!");
                     resetInputs();
+                    navigate("/dashboard");
                 }
 
             } catch (error) {
                 console.error("Error during login:", error);
+                toast.error("Login failed!");
             }
         } else {
             setErrors(newErrors);
+            toast.warn("Please check your inputs and try again.");
         }
     };
 
@@ -66,7 +74,7 @@ function useAuthForm() {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post('./backend/api/signup.php', {
+                const response = await axios.post('http://localhost/backend/api/signup.php', {
                     email: email,
                     password: password,
                     confirmPassword: confirmPassword
@@ -77,11 +85,16 @@ function useAuthForm() {
                 
                 // Reset inputs after successful signup
                 if(response.data.message === "User registered successfully.") { 
+                    toast.success("Sign-up successful! Welcome aboard!");
                     resetInputs();
+                    navigateToLogin();
+                } else if (response.data.message === "User registration failed.") {
+                    toast.error("Something went wrong. Please try again later.");
                 }
 
             } catch (error) {
                 console.error("Error during sign up:", error);
+                toast.error("Oops! An error occurred during sign-up.");
             }
         } else {
             setErrors(newErrors);
