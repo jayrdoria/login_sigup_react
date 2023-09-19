@@ -3,13 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-body {
-    min-height: 100vh;
-    width: 100%;
-    background-color: #f5615e;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.container {
+.container_auth {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -21,7 +15,7 @@ body {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.container .registration {
+.container_auth .registration {
     display: none;
 }
 
@@ -37,7 +31,7 @@ body {
     display: none;
 }
 
-.container .form {
+.container_auth .form {
     padding: 2rem;
 }
 
